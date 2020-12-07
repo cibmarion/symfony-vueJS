@@ -3,5 +3,6 @@
     <p class="lead"><time datetime="{{ article.publishedAt|date('c') }}">{{ article.publishedAt|date }}</time></p>
     <hr class="my-4">
     <p>{{ article.content }}</p>
+    <a class="btn btn-primary" href="{{ path('article-index') }}">Back to the list</a>
 </div>
 

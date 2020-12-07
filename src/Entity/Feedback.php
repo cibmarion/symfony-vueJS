@@ -7,7 +7,10 @@ use App\Repository\FeedbackRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     collectionOperations={"get", "post"},
+ *     itemOperations={"get"}
+ * )
  * @ORM\Entity(repositoryClass=FeedbackRepository::class)
  */
 class Feedback

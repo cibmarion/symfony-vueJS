@@ -3,13 +3,17 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     collectionOperations={"get"},
+ *     itemOperations={"get"}
+ * )
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
  */
 class Article
@@ -57,6 +61,7 @@ class Article
     private $updateAt;
 
     /**
+     * @ApiSubresource
      * @ORM\OneToMany(targetEntity=Feedback::class, mappedBy="session")
      */
     private $feedback;

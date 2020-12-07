@@ -22,7 +22,7 @@
           <label for="exampleFormControlTextarea1">Commentaires :</label>
           <textarea v-model="comment" name="comment" placeholder="This talk was...." class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
         </div>
-        <input :disabled="!author || !rating || !comment" type="submit" value="Ajouter">
+        <button class="btn btn-primary" :disabled="!author || !rating || !comment" type="submit">Ajouter</button>
       </form>
     </div>
 </template>
@@ -44,16 +44,16 @@ export default {
   },
   methods: {
     fetchFeedback() {
-      fetch('/api/articles/${this.articleId}/feedback')
+      fetch(`/api/articles/${this.articleId}/feedback`)
       .then(response => response.json())
-      .then(data => this.feedback = data['hydra:member'])
+      .then(data => this.feedback = data[`hydra:member`])
     },
     onSubmit(){
       const{articleId, author, rating, comment} = this;
-      fetch('/api/feedback', {
+      fetch(`/api/feedback`, {
         method: 'POST',
-        headers: {'Content-Type': 'application/ld+json'},
-        body: JSON.stringify({article: '/api/articles/${articleId}', author, rating, comment})
+        headers: {'Content-Type': `application/ld+json`},
+        body: JSON.stringify({article: `/api/articles/${articleId}`, author, rating, comment})
       })
       .then(()=>{
         this.sent = true;

@@ -21,7 +21,7 @@ class SessionControlleur extends AbstractController
     }
 
     /**
-     * @Route("/article/{id}", name="article-detail")
+     * @Route("articles/{id}", name="article-detail")
      * @ParamConverter("article", class="App\Entity\Article")
      */
     public function detail(Article $article)
@@ -30,4 +30,9 @@ class SessionControlleur extends AbstractController
             'article' => $article
         ]);
     }
+
+/*    public function feedBack(Article $article)
+    {
+        return new JsonResponse($article);
+    }*/
 }
