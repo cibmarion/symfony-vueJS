@@ -1,14 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ article.title }}|SymfonyCon {% endblock %}
+{% block title %}{{ article.title }}Mes articles{% endblock %}
 
 {% block body %}
     <h1>SymfonyCon Schedule</h1>
     <main>{% include 'article/session.html.twig' with {article: article} %}</main>
     <a href="{{ path('article-index') }}">Back to the list</a>
-    <section id="feedback">
-        <feedback article-id="{{ article.id }}"></feedback>
-    </section>
+    <div class="card" style="width: 40rem;">
+        <div class="card-body">
+            <section id="feedback">
+                <feedback article-id="{{ article.id }}"></feedback>
+            </section>
+        </div>
+    </div>
+
 {% endblock %}
 
 {% block javascripts %}

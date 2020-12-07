@@ -1,7 +1,7 @@
-<h1>
-    <a href="{{ path('article-detail', {id: article.id}) }}">{{ article.title }}</a>
-</h1>
-<div>
-    <time datetime="{{ article.publishedAt|date('c') }}">{{ article.publishedAt|date }}</time>
+<div class="jumbotron">
+    <h1 class="display-4"><a href="{{ path('article-detail', {id: article.id}) }}">{{ article.title }}</a></h1>
+    <p class="lead"><time datetime="{{ article.publishedAt|date('c') }}">{{ article.publishedAt|date }}</time></p>
+    <hr class="my-4">
+    <p>{{ article.content }}</p>
 </div>
-<p>{{ article.content }}</p>
+

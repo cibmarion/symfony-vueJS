@@ -13,7 +13,8 @@ import './styles/app.css';
 // start the Stimulus application
 import './bootstrap';
 
-Vue.component('start-rating', StartRating);
+
+Vue.component('vue-star-rating', StartRating);
 
 new Vue({
     el: '#feedback',

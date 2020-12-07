@@ -3,27 +3,28 @@
     <ul v-if="feedback.length">
       <li v-for="f in feedback" :key="f['@id']">
         {{ f.author }}
-        <star-rating :rating="f.rating" :read-only="true"></star-rating>
+        <vue-star-rating :rating="f.rating" :read-only="true"></vue-star-rating>
         {{ f.comment }}
       </li>
     </ul>
-    <p v-else>No feedback PPP !</p>
+    <p v-else>No feedback yet!</p>
     <p v-if="sent">Thanks for rating this talk!</p>
-    <form v-else @submit.prevent="onSubmit">
-      <div class="form-group">
-        <label for="exampleFormControlInput1">Auteur</label>
-        <input v-model="author" name="author" placeholder="Author" id="exampleFormControlInput1">
-      </div>
-      <div class="form-group">
-        <star-rating v-model="rating"></star-rating>
-      </div>
-      <div class="form-group">
-        <label for="exampleFormControlTextarea1">Commentaire</label>
-        <textarea v-model="comment" name="comment" placeholder="This talk was...." class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-      </div>
-      <input :disabled="!author || !comment" type="submit" value="Bla">
-    </form>
-  </div>
+      <form v-else @submit.prevent="onSubmit">
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Auteur :</label>
+          <input v-model="author" name="author" placeholder="Author" id="exampleFormControlInput1">
+        </div>
+        <div class="form-group">
+          <label>Notes : </label>
+          <vue-star-rating v-model="rating"></vue-star-rating>
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Commentaires :</label>
+          <textarea v-model="comment" name="comment" placeholder="This talk was...." class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <input :disabled="!author || !rating || !comment" type="submit" value="Ajouter">
+      </form>
+    </div>
 </template>
 
 <script>
@@ -48,11 +49,11 @@ export default {
       .then(data => this.feedback = data['hydra:member'])
     },
     onSubmit(){
-      const{articleId, author, comment} = this;
+      const{articleId, author, rating, comment} = this;
       fetch('/api/feedback', {
         method: 'POST',
         headers: {'Content-Type': 'application/ld+json'},
-        body: JSON.stringify({article: '/api/articles/${articleId}', author, comment})
+        body: JSON.stringify({article: '/api/articles/${articleId}', author, rating, comment})
       })
       .then(()=>{
         this.sent = true;

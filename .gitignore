@@ -1,4 +1,5 @@
 .env
 /public/bundles/
 /var/
+/node_modules/
 /vendor/
